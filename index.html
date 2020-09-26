@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fate Dice</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h3, h2, h1{
+            font-weight: normal;
+            color: #888;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            cursor: default;
+        }
+        h2, h1 {
+            color: #000;
+        }
+        h1 {
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .die {
+            margin: 25px;
+            width: 100px;
+            height: 100px;
+            border: 5px solid #888;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            font-size: 64px;
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Fate Dice</h1>
+    </div>
+    <div class="container">
+        <div class="die"></div>
+        <div class="die">+</div>
+        <div class="die">+</div>
+        <div class="die">-</div>
+    </div>
+    <div class="container">
+        <h3>Click anywhere to roll the dice</h3>
+    </div>
+    <div class="container">
+        <h2>Aggregate score: <span class="score"></span></h2>
+    </div>
+
+    <script>
+        dice = document.querySelectorAll(".die")
+        score = document.querySelector(".score")
+        roll = () => {
+            aggregateScore = 0
+            for (var i = 0; i < dice.length; i++) {
+                number = Math.floor(Math.random() * Math.floor(3)) - 1
+                dice[i].innerHTML = number == 0 ? " " : (number == 1 ? "+" : "-")
+                aggregateScore += number
+            }
+            score.innerHTML = aggregateScore
+        }
+        document.onload = roll
+        document.onmouseup = roll
+    </script>
+
+</body>
+
+</html>
